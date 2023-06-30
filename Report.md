@@ -8,6 +8,7 @@
   5. Deterministic Policy: making the learning process stable and balancing both Exploration & Exploitation.
   6. Experience Delay: with repetition learning and uncorrelated experience.
   7. Ornstein-Uhlenbeck approach: for processing exploration noise.
+  8. The Udacity codebase is modified to handle 20 idential agents.
 
 ## Plot of Rewards
 

@@ -17,7 +17,6 @@ The barrier for solving this version of the environment is slightly different th
     This yields an average score for each episode (where the average is over all 20 agents).
 
 As an example, consider the plot below, where we have plotted the average score (over all 20 agents) obtained with each episode.
-Plot of average scores (over all agents) with each episode.
 
 <img src="example.png"/>
 Plot of average scores (over all agents) with each episode.

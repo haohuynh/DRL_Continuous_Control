@@ -8,4 +8,7 @@ In this Unity ML-Agents Reacher Environment, a double-jointed arm can move to ta
 
 The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
 
+### Note
+
 ## Algorithm
+Also see Report.md

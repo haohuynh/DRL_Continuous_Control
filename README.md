@@ -19,6 +19,6 @@ Please see https://arxiv.org/abs/1509.02971 for the main idea of this algorithm.
 
 The Udacity implementation of DDPG can be found at ddpg_agent.py and model.py.
 
-Please see the Continuous Control notebook for how the DDPG Agent can be trained.
+Please see the Continuous Control notebook for how the DDPG Agent can be utilized for this project.
 
 Also see Report.md

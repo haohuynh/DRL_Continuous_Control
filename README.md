@@ -11,7 +11,7 @@ The observation space consists of 33 variables corresponding to position, rotati
 ### Note
 
 The project environment contains only one agent.
-TThe task is episodic, and in order to solve the environment, the agent must get an average score of +30 over 100 consecutive episodes.
+The task is episodic, and in order to solve the environment, the agent must get an average score of +30 over 100 consecutive episodes.
 
 ## Deep Deterministic Policy Gradient (DDPG) Algorithm
 

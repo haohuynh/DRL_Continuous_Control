@@ -16,13 +16,15 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
 LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0        # L2 weight decay
+N_LEARN_UPDATES = 10    # Number of Learning Updates -- Udacity Idea
+N_TIME_STEPS = 20       # Update every n time steps -- Udacity Idea
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class Agent():
     """Interacts with and learns from the environment."""
     
-    def __init__(self, state_size, action_size, random_seed, n_agents):
+    def __init__(self, state_size, action_size, random_seed):
         """Initialize an Agent object.
         
         Params
@@ -50,20 +52,22 @@ class Agent():
 
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
-        
-        # Number of Virtual Agents
-        self.n_agents = n_agents
+           
     
-    def step(self, states, actions, rewards, next_states, dones):
+    def step(self, time_step, states, actions, rewards, next_states, dones):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward
         
         for exp in zip(states, actions, rewards, next_states, dones):
             self.memory.add(*exp)
 
+        # Only update the learning networks after n time steps -- Udacity Idea
+        if time_step % N_TIME_STEPS != 0:
+            return
+            
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
-            for _ in range(self.n_agents):
+            for _ in range(N_LEARN_UPDATES): # -- Udacity Idea
                 experiences = self.memory.sample()
                 self.learn(experiences, GAMMA)
 

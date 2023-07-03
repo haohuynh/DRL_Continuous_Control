@@ -26,7 +26,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 Please see https://arxiv.org/abs/1509.02971 for the main idea of this algorithm.
 
-The Udacity implementation of DDPG can be found at ddpg_agent.py and model.py.
+The Udacity implementation of DDPG can be found at ddpg_agent.py and model.py. The DDPG Agent is slightly modified to handle multiple clones of the arm.
 
 Please see the Continuous Control notebook for how the DDPG Agent can be utilized for this project.
 

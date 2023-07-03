@@ -22,7 +22,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class Agent():
     """Interacts with and learns from the environment."""
     
-    def __init__(self, state_size, action_size, random_seed):
+    def __init__(self, state_size, action_size, random_seed, n_agents):
         """Initialize an Agent object.
         
         Params
@@ -50,28 +50,37 @@ class Agent():
 
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
+        
+        # Number of Virtual Agents
+        self.n_agents = n_agents
     
-    def step(self, state, action, reward, next_state, done):
+    def step(self, states, actions, rewards, next_states, dones):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward
-        self.memory.add(state, action, reward, next_state, done)
+        
+        for exp in zip(states, actions, rewards, next_states, dones):
+            self.memory.add(*exp)
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
-            experiences = self.memory.sample()
-            self.learn(experiences, GAMMA)
+            for _ in range(self.n_agents):
+                experiences = self.memory.sample()
+                self.learn(experiences, GAMMA)
 
-    def act(self, state, add_noise=True):
+    def act(self, states, add_noise=True):
         """Returns actions for given state as per current policy."""
-        state = torch.from_numpy(state).float().to(device)
-        self.actor_local.eval()
-        with torch.no_grad():
-            action = self.actor_local(state).cpu().data.numpy()
-        self.actor_local.train()
-        if add_noise:
-            action += self.noise.sample()
-        return np.clip(action, -1, 1)
-
+        actions = []
+        for state in states:
+            state = torch.from_numpy(state).float().to(device)
+            self.actor_local.eval()
+            with torch.no_grad():
+                action = self.actor_local(state).cpu().data.numpy()
+            self.actor_local.train()
+            if add_noise:
+                action += self.noise.sample()
+            actions.append(np.clip(action, -1, 1))
+        return actions
+    
     def reset(self):
         self.noise.reset()
 

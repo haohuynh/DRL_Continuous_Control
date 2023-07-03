@@ -24,4 +24,5 @@ Given the codebase, try to implement additional algorithms such as:
   8. TRPO
   9. CEM
   10. CMA-ES
+      
 Also try to evaluate the effectiveness of these algorithms if possible

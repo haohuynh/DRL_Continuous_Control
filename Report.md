@@ -10,7 +10,7 @@
   7. Ornstein-Uhlenbeck approach: for processing exploration noise.
   8. The Udacity codebase is modified to handle 20 idential agents.
   9. Hypeparameters:
-       Changed the number of units of the network layers down to 64 or 128 because of the sizes of States, Actions, & Outputs.
+       The number of units of the network layers is adjusted several times with 32/32, 64/64, 128/128, 256/256, then, finally, 400/300 as default.
        Increased the number of time steps to 2368 to hopefully cover a majority of the possibility of States, Actions, & Rewards.
        Utilized the Udacity report to add the number of learning updates, and the number of time steps before an update.
 

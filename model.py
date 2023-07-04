@@ -10,9 +10,9 @@ def hidden_init(layer):
     return (-lim, lim)
 
 class Actor(nn.Module):
-    """Actor (Policy) Model."""
+    """Actor (Policy) Model. Referenced to Udacity Knowledge for the number of units"""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=64, fc2_units=64):
+    def __init__(self, state_size, action_size, seed, fc1_units=128, fc2_units=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -28,6 +28,8 @@ class Actor(nn.Module):
         self.fc2 = nn.Linear(fc1_units, fc2_units)
         self.fc3 = nn.Linear(fc2_units, action_size)
         self.reset_parameters()
+        
+        self.bn1 = nn.BatchNorm1d(fc1_units)
 
     def reset_parameters(self):
         self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
@@ -36,15 +38,15 @@ class Actor(nn.Module):
 
     def forward(self, state):
         """Build an actor (policy) network that maps states -> actions."""
-        x = F.relu(self.fc1(state))
+        x = F.relu(self.bn1(self.fc1(state)))
         x = F.relu(self.fc2(x))
         return F.tanh(self.fc3(x))
 
 
 class Critic(nn.Module):
-    """Critic (Value) Model."""
+    """Critic (Value) Model. Referenced to Udacity Knowledge for the number of units"""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=64, fc2_units=64):
+    def __init__(self, state_size, action_size, seed, fcs1_units=128, fc2_units=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -60,7 +62,9 @@ class Critic(nn.Module):
         self.fc2 = nn.Linear(fcs1_units+action_size, fc2_units)
         self.fc3 = nn.Linear(fc2_units, 1)
         self.reset_parameters()
-
+    
+        self.bn1 = nn.BatchNorm1d(fcs1_units)
+    
     def reset_parameters(self):
         self.fcs1.weight.data.uniform_(*hidden_init(self.fcs1))
         self.fc2.weight.data.uniform_(*hidden_init(self.fc2))
@@ -68,7 +72,7 @@ class Critic(nn.Module):
 
     def forward(self, state, action):
         """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
-        xs = F.relu(self.fcs1(state))
+        xs = F.relu(self.bn1(self.fcs1(state)))
         x = torch.cat((xs, action), dim=1)
         x = F.relu(self.fc2(x))
         return self.fc3(x)

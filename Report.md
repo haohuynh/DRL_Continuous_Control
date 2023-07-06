@@ -7,13 +7,12 @@
   4. Soft Updates: gradually blend the Target Network weights with the Local Network weights, preventing oscillations.
   5. Deterministic Policy: making the learning process stable and balancing both Exploration & Exploitation.
   6. Experience Delay: with repetition learning and uncorrelated experience.
-  7. Ornstein-Uhlenbeck approach: for processing exploration noise.
+  7. Ornstein-Uhlenbeck approach: for processing exploration noise. OUNoise is also updated per Udacity Knowledge suggestions.
   8. The Udacity codebase is modified to handle 20 idential agents.
   9. Hypeparameters:
        The number of units of the network layers is adjusted several times with 400/300, 32/32, 64/64, 128/128, 256/256, then, finally, 128/256 as recommended by Udacity Knowledge. Aslo used Batch Normalization after the 1st Fully Connected layers.
        Increased the number of time steps to 1368 to hopefully cover a majority of the possibility of States, Actions, & Rewards.
        Utilized the Udacity Project Instructions to add the number of learning updates, and the number of time steps before an update.
-       OUNoise is also updated per Udacity Knowledge suggestions.
 
 ## Plot of Rewards
 

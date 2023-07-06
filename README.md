@@ -26,7 +26,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 Please see https://arxiv.org/abs/1509.02971 for the main idea of this algorithm.
 
-The Udacity implementation of DDPG can be found at ddpg_agent.py and model.py. The Neural Net Model is slightly modified to increase the speed of convergence.
+The Udacity implementation of DDPG can be found at ddpg_agent.py and model.py. The Agent & Neural Net Model are slightly modified to increase the speed of convergence.
 
 Please see the Continuous Control notebook for how the DDPG Agent can be utilized for 20 identical agents.
 

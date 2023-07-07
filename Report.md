@@ -15,6 +15,7 @@
        Utilized the Udacity Project Instructions to add the number of learning updates, and the number of time steps before an update.
 
 ## Plot of Rewards
+<img src="example.png"/>
 
 ## Ideas for Future Work
 Given the codebase, try to implement additional algorithms such as:
